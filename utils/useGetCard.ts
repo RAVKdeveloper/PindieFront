@@ -4,26 +4,18 @@ import { arrCards } from '@/db/data'
 
 import type { CardType } from '@/db/data'
 
-
-
 export const useGetCard = (cardId: number): CardType[] | undefined => {
+  const [cardValue, setCard] = useState<CardType[]>()
 
-    const [ cardValue, setCard ] = useState<CardType[]>()
-    
-    useEffect(() => {
+  useEffect(() => {
+    if (cardId) filteringCards()
+  }, [cardId])
 
-        if(cardId) filteringCards()
+  function filteringCards() {
+    const card = arrCards.filter(({ id }) => id === cardId)
 
-    }, [ cardId ])
+    setCard(card)
+  }
 
-    function filteringCards() {
-
-        const card = arrCards.filter(({ id }) => id === cardId)
-
-        setCard(card)
-
-    }
-
-    return cardValue
-
+  return cardValue
 }

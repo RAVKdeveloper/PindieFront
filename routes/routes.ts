@@ -1,17 +1,17 @@
 export const Routes = {
+  // Pages categorie
+  newCards: '/categorie/new',
+  popularCards: '/categorie/popular',
+  tdsCards: '/categorie/TDS',
+  shoterCards: '/categorie/shooter',
+  pixelCards: '/categorie/pixel',
+  runnerCards: '/categorie/runner',
 
-// Pages categorie
-   newCards: '/categorie/new',
-   popularCards: '/categorie/popular',
-   tdsCards: '/categorie/TDS',
-   shoterCards: '/categorie/shooter',
-   pixelCards: '/categorie/pixel', 
-   runnerCards: '/categorie/runner',
+  // One Game
+  oneGame: '/game/',
 
-// One Game
-   oneGame: '/game/',
+  // Auth
+  login: '/login',
 
-// Auth
-   login: '/login'
-
+  dashboard: '/dashboard',
 }

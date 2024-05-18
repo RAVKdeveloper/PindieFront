@@ -1,18 +1,14 @@
 'use client'
 
-import { FC, useState } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { FC } from 'react'
 
-import Overlay from '@/ui/Overlay/Overlay'
-import Popup from '@/ui/Popup/Popup'
-import AuthForm from '@/components/Entitys/Forms/AuthForm/AuthForm'
-
-// import { useAuth } from '@/components/shared/AuthWrapper/logic/useAuth.model'
 import useStore from '@/components/service/zustand/store.instance'
 
 import { arrNavHeader } from '@/db/data'
+import { Routes } from '@/routes/routes'
 
 import logo from '@/images/logo.svg'
 
@@ -20,13 +16,7 @@ import s from './style.module.css'
 
 const Header: FC = () => {
   const pathName = usePathname()
-  const { isAuth, logout, isOpenPopup, setIsOpenPopup } = useStore()
-
-  // const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const openPopup = () => setIsOpenPopup(true)
-
-  const closePopup = () => setIsOpenPopup(false)
+  const { isAuth, logout, setIsOpenPopup } = useStore()
 
   return (
     <header className={s.header}>
@@ -47,11 +37,11 @@ const Header: FC = () => {
           ))}
         </ul>
         {!isAuth && (
-          <div className={s.auth}>
-            <button onClick={openPopup} className={s['auth__button']}>
-              Войти
-            </button>
-          </div>
+          <Link href={Routes.login} className={s.authLink}>
+            <div className={s.auth}>
+              <button className={s['auth__button']}>Войти</button>
+            </div>
+          </Link>
         )}
         {isAuth && (
           <div className={s.auth}>
@@ -61,14 +51,6 @@ const Header: FC = () => {
           </div>
         )}
       </nav>
-      {!isAuth && (
-        <>
-          <Overlay isOpen={isOpenPopup} close={closePopup} />
-          <Popup isOpen={isOpenPopup} setIsOpen={closePopup}>
-            <AuthForm />
-          </Popup>
-        </>
-      )}
     </header>
   )
 }

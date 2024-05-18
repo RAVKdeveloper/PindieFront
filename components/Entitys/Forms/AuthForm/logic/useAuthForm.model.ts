@@ -1,40 +1,24 @@
 'use client'
 
-import { ChangeEvent, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { ChangeEvent, useEffect, useState } from 'react'
 
-import useStore from '@/components/service/zustand/store.instance'
+import { useLoginMutation } from '@/components/shared'
+import { Routes } from '@/routes/routes'
 
-import { AuthAPI } from '@/components/service/api/auth/auth.api'
-
-import type { useAuthFormType } from './useAuthForm.type'
-
-interface FormData {
-  identifier: string
-  password: string
-}
+import type { FormData, useAuthFormType } from './useAuthForm.type'
 
 export const useAuthForm = (): useAuthFormType => {
   const [authData, setAuthData] = useState<FormData>({
-    identifier: '',
+    email: '',
     password: '',
   })
   const [message, setMessage] = useState<string>('')
-  const { login, setIsOpenPopup } = useStore()
+  const { mutate, isSuccess, isError } = useLoginMutation()
+  const { push } = useRouter()
 
   const fetchLoginUser = async (dto: FormData) => {
-    try {
-      const api = new AuthAPI('POST')
-
-      const data = await api.login(dto)
-
-      if (data) login(data.user, data.jwt)
-
-      setMessage('Вы зарегистрированы')
-
-      setTimeout(() => setIsOpenPopup(false), 1500)
-    } catch {
-      setMessage('Неверный логин или пароль')
-    }
+    mutate(dto)
   }
 
   const submit = () => {
@@ -44,6 +28,15 @@ export const useAuthForm = (): useAuthFormType => {
   const changeInput = (e: ChangeEvent<HTMLInputElement>) => {
     setAuthData({ ...authData, [e.target.name]: e.target.value })
   }
+
+  useEffect(() => {
+    if (isSuccess) {
+      setMessage('Вы зарегистрированы')
+      push(Routes.dashboard)
+    }
+
+    if (!isSuccess && isError) setMessage('Неверный логин или пароль')
+  }, [isError, isSuccess])
 
   return {
     submit,

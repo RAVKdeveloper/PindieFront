@@ -2,8 +2,8 @@
 
 import { FC } from 'react'
 
-import TextField from '@/ui/TextField/TextField'
 import FormBtn from '@/ui/FormBtn/FormBtn'
+import TextField from '@/ui/TextField/TextField'
 
 import { useAuthForm } from './logic/useAuthForm.model'
 
@@ -17,8 +17,8 @@ const AuthForm: FC = () => {
       <h2 className={s['form__title']}>Авторизация</h2>
       <div className={s['form__fields']}>
         <TextField
-          name='identifier'
-          value={authData.identifier}
+          name='email'
+          value={authData.email}
           label='Email'
           type='email'
           placeholder='hello@world.com'
