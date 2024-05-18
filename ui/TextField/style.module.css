@@ -1,0 +1,43 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .title {
+    margin-bottom: 8px;
+    font-size: 22px;
+  }
+
+  .title.error{
+    color: red;
+  }
+  
+  .input {
+    width: 100%;
+    max-width: 444px;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    padding: 16px 24px;
+    font-family: inherit;
+    font-size: 22px;
+    transition: all .1s ease;
+  }
+  
+
+  .input.error{
+    border-color: red;
+    transition: border-color .1s ease;
+  }
+
+  .input.error:focus{
+    border-color: red;
+    transition: all .2s ease;
+  }
+
+  .errorText{
+    color: red;
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: 16px;
+  }

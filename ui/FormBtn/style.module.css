@@ -1,0 +1,42 @@
+.root{
+    font-family: "Rubic One", sans-serif;
+    font-size: 20px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    border: none;
+    padding: 16px 24px;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.root.borderR{
+    border-radius: 10px;
+}
+
+.root.basic{
+    background-color: transparent;
+}
+
+.root.basic:hover {
+    color: yellow;
+    background-color: #000;
+}
+  
+.root.basic:disabled {
+    opacity: .9;
+    pointer-events: none;
+}
+
+.root.primary{
+    background-color: #000;
+    color: #fff;
+}
+
+.root.primary:hover {
+    color: yellow;
+}
+  
+.root.primary:disabled {
+    opacity: .5;
+    pointer-events: none;
+}
