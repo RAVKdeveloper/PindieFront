@@ -1,30 +1,30 @@
 'use client'
 
-import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import { useEffect } from 'react'
 
 import useStore from '@/components/service/zustand/store.instance'
 
-import { AuthAPI } from '@/components/service/api/auth/auth.api'
+import { useMeQuery } from '@/components/shared'
+
+import type { UserType } from '@/components/service/types/user.type'
 
 export const useAuth = () => {
   const pathname = usePathname()
   const { setAuth } = useStore()
+  const { data, isError, isSuccess } = useMeQuery()
 
-  const fetchMe = async () => {
-    try {
-      const api = new AuthAPI('GET')
+  const trueAuth = (user: UserType) => {
+    setAuth(true, user)
+  }
 
-      const data = await api.me()
-
-      if (data) setAuth(true, data)
-      else setAuth(false, null)
-    } catch {
-      alert('Произошла ошибка авторизации ')
-    }
+  const falseAuth = () => {
+    setAuth(false, null)
   }
 
   useEffect(() => {
-    fetchMe()
-  }, [pathname])
+    if (isSuccess && data) trueAuth(data.user)
+
+    if (isError && !isSuccess) falseAuth()
+  }, [pathname, data])
 }

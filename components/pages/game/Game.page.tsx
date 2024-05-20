@@ -2,22 +2,22 @@
 
 import { FC } from 'react'
 
-import GameSection from '@/ui/GameSection/GameSection'
+import { useGetGameByIdQuery } from '@/components/shared'
+
 import AboutGame from '@/components/Entitys/AboutGame/about'
+import GameSection from '@/ui/GameSection/GameSection'
 
 import { Loader } from './loader/Loader'
 
-import { useOneGame } from './logic/useOneGame.model'
-
-const GamePage: FC<{ id: number }> = ({ id }) => {
-  const { card, isFetching } = useOneGame(id)
+const GamePage: FC<{ id: string }> = ({ id }) => {
+  const { data, isFetching } = useGetGameByIdQuery(id)
 
   return (
     <>
-      {card && !isFetching ? (
+      {data && data.data && !isFetching ? (
         <>
-          <GameSection source={card.link} />
-          <AboutGame {...card} />
+          <GameSection source={data.data.link} />
+          <AboutGame {...data.data} />
         </>
       ) : (
         <Loader />

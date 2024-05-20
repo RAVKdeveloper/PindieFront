@@ -1,2 +1,7 @@
 export { LoginUserDto } from './auth/Login.dto'
 export { RegistrationUserDto } from './auth/Registration.dto'
+export { CreateGameDto } from './game/CreateGame.dto'
+export { QueryGamesDto } from './game/Query.dto'
+export { UpdateGameDto } from './game/UpdateGame.dto'
+export { CreateVoteDto } from './vote/CreateVote.dto'
+export { RemoveVoteDto } from './vote/RemoveVote.dto'

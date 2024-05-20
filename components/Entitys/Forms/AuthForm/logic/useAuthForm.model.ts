@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { ChangeEvent, useEffect, useState } from 'react'
 
+import useStore from '@/components/service/zustand/store.instance'
 import { useLoginMutation } from '@/components/shared'
 import { Routes } from '@/routes/routes'
 
@@ -14,7 +15,8 @@ export const useAuthForm = (): useAuthFormType => {
     password: '',
   })
   const [message, setMessage] = useState<string>('')
-  const { mutate, isSuccess, isError } = useLoginMutation()
+  const { login } = useStore()
+  const { mutate, isSuccess, isError, data } = useLoginMutation()
   const { push } = useRouter()
 
   const fetchLoginUser = async (dto: FormData) => {
@@ -30,13 +32,14 @@ export const useAuthForm = (): useAuthFormType => {
   }
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && data && data.user) {
       setMessage('Вы зарегистрированы')
+      login(data.user)
       push(Routes.dashboard)
     }
 
     if (!isSuccess && isError) setMessage('Неверный логин или пароль')
-  }, [isError, isSuccess])
+  }, [isError, isSuccess, data])
 
   return {
     submit,

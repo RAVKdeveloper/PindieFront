@@ -1,20 +1,20 @@
+'use client'
+
 import { FC } from 'react'
 
-import { GamesApi } from '@/components/service/api/games/games.api'
+import { useGetAllGamesQuery } from '@/components/shared'
 
 import BannerHomePage from '@/components/HomePage/Banner/banner'
 import CardList from '@/components/HomePage/CardList/CardList'
 import PromoHomePage from '@/components/HomePage/Promo/promo'
 
-const HomePage: FC = async () => {
-  const newCards = await new GamesApi('GET').getByCategories('new')
-  const popularCards = await new GamesApi('GET').getByCategories('popular')
+const HomePage: FC = () => {
+  const { data } = useGetAllGamesQuery()
 
   return (
     <>
       <BannerHomePage />
-      <CardList title={'Популярное'} data={popularCards} />
-      <CardList title={'Новинки'} data={newCards} />
+      {data && data.data && <CardList title={'Все игры'} data={data.data} />}
       <PromoHomePage />
     </>
   )

@@ -20,7 +20,9 @@ const CardList: FC<Props> = ({ title, data }) => {
         {title}
       </h2>
       <ul className={s['cards-list']}>
-        {data && data.map(card => <CardGame key={card.id} {...card} />)}
+        {data.map(card => (
+          <CardGame key={card._id} {...card} />
+        ))}
       </ul>
     </section>
   )

@@ -2,16 +2,19 @@ import { create } from 'zustand'
 
 import { tokenKey } from '@/configs/server.config'
 
-import type { StoreType } from './store.type'
 import type { UserType } from '../types/user.type'
+import type { StoreType } from './store.type'
 
 const useStore = create<StoreType>(set => ({
   isAuth: false,
   user: null,
   token: null,
   isOpenPopup: false,
-  login: (user: UserType, token: string) => {
-    set({ isAuth: true, user, token })
+  login: (user: UserType) => {
+    set({
+      isAuth: true,
+      user: { _id: user._id, email: user.email, password: user.password, username: user.username },
+    })
   },
   logout: () => {
     localStorage.removeItem(tokenKey)

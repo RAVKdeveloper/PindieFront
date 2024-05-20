@@ -1,14 +1,8 @@
-import type { UserRoleType } from './userRole.type'
+// import type { UserRoleType } from './userRole.type'
 
 export interface UserType {
-  id: number
-  games: null
+  _id: string
   email: string
-  provider: string
-  blocked: boolean
-  confirmed: boolean
-  created_at: string
-  role: UserRoleType
   username: string
-  updated_at: string
+  password: string
 }

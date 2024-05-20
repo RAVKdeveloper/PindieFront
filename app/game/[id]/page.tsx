@@ -9,11 +9,9 @@ interface Props {
 }
 
 const Game: FC<Props> = ({ params }) => {
-  const idNumber = Number(params.id)
-
   return (
     <main>
-      <GamePage id={idNumber} />
+      <GamePage id={params.id} />
     </main>
   )
 }

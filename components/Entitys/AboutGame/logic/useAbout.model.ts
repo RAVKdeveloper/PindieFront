@@ -2,53 +2,44 @@ import { useEffect, useState } from 'react'
 
 import useStore from '@/components/service/zustand/store.instance'
 
-import { GamesApi } from '@/components/service/api/games/games.api'
+import { useCreateVoteMutation, useRemoveVoteMutation } from '@/components/shared'
 
-import type { UserType } from '@/components/service/types/user.type'
-import type { useAboutType } from './useAbout.type'
-
-export const useAbout = (users_permissions_users: UserType[]): useAboutType => {
+export const useAbout = (votes: string[]) => {
   const [voited, setIsVoited] = useState<boolean>(false)
   const { user, setIsOpenPopup, isOpenPopup } = useStore()
+  const { mutate: createVote } = useCreateVoteMutation()
+  const { mutate: removeVote } = useRemoveVoteMutation()
 
-  const fetchVoited = async (gameId: number) => {
-    try {
-      const api = new GamesApi('PUT')
-
-      const userArr = users_permissions_users.map(user => user.id)
-
-      if (user) {
-        userArr.push(user.id)
-
-        await api.putVoited(gameId, userArr)
-
-        setIsVoited(true)
-      } else setIsOpenPopup(true)
-    } catch {
-      alert('Произошла ошибка')
-    }
+  const addVoteToGame = (gameId: string) => {
+    createVote({ gameId })
   }
 
-  const filterVoited = () => {
-    if (user) {
-      const isVoited = users_permissions_users.filter(person => person.id === user.id)
+  const removeVoteToGame = (gameId: string) => {
+    removeVote({ gameId })
+  }
 
-      if (isVoited.length > 0) return setIsVoited(true)
+  const filterVotes = () => {
+    if (votes && user) {
+      const isVoites = votes.find(id => id === user._id)
 
-      return setIsVoited(false)
+      if (!isVoites) setIsVoited(false)
+
+      if (isVoites) setIsVoited(true)
     }
   }
 
   const closePopup = () => setIsOpenPopup(false)
 
   useEffect(() => {
-    if (user) filterVoited()
-  }, [user])
+    filterVotes()
+  }, [votes, user])
 
   return {
-    fetchVoited,
-    voited,
     isOpenPopup,
     closePopup,
+    voited,
+    user,
+    addVoteToGame,
+    removeVoteToGame,
   }
 }
