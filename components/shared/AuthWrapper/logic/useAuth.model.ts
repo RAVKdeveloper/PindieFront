@@ -26,5 +26,6 @@ export const useAuth = () => {
     if (isSuccess && data) trueAuth(data.user)
 
     if (isError && !isSuccess) falseAuth()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, data])
 }

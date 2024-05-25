@@ -23,14 +23,16 @@
 }
 
 .form__reset {
-  font-family: "Rubic One", sans-serif;
+  font-family: 'Rubic One', sans-serif;
   background-color: transparent;
   font-size: 20px;
   letter-spacing: 1.2px;
   text-transform: uppercase;
   border: none;
   padding: 16px 24px;
-  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  transition:
+    color 0.3s ease-in-out,
+    background-color 0.3s ease-in-out;
 }
 
 .form__reset:hover {
@@ -51,13 +53,15 @@
 .form__submit {
   background-color: #000;
   color: #fff;
-  font-family: "Rubic One", sans-serif;
+  font-family: 'Rubic One', sans-serif;
   font-size: 20px;
   letter-spacing: 1.2px;
   text-transform: uppercase;
   border: none;
   padding: 16px 24px;
-  transition: color 0.3s ease-in, background-color 0.3s ease-in;
+  transition:
+    color 0.3s ease-in,
+    background-color 0.3s ease-in;
 }
 
 .form__submit:hover {
@@ -72,4 +76,16 @@
 .message {
   margin: 10px;
   font-size: 16px;
+}
+
+.registration {
+  padding: 20px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  items-center: center;
+}
+
+.registration:hover {
+  text-decoration: underline;
 }

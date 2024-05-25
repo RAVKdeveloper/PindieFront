@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 import { GamesApi } from '@/components/service/api/games/games.api'
 
@@ -25,6 +25,7 @@ export const useOneGame = (id: number): { card: GameType | undefined; isFetching
 
   useEffect(() => {
     if (id) fetchCard()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   return {

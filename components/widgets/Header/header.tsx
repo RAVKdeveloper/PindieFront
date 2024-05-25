@@ -6,8 +6,8 @@ import { usePathname } from 'next/navigation'
 import { FC } from 'react'
 
 import useStore from '@/components/service/zustand/store.instance'
+import { useGetAllCategoriesQuery } from '@/components/shared'
 
-import { arrNavHeader } from '@/db/data'
 import { Routes } from '@/routes/routes'
 
 import logo from '@/images/logo.svg'
@@ -16,7 +16,8 @@ import s from './style.module.css'
 
 const Header: FC = () => {
   const pathName = usePathname()
-  const { isAuth, logout, setIsOpenPopup } = useStore()
+  const { isAuth, logout } = useStore()
+  const { data } = useGetAllCategoriesQuery()
 
   return (
     <header className={s.header}>
@@ -25,16 +26,18 @@ const Header: FC = () => {
       </Link>
       <nav className={s.menu}>
         <ul className={s['menu__list']}>
-          {arrNavHeader.map(({ name, route }, i) => (
-            <li key={i} className={s['menu__item']}>
-              <Link
-                href={route}
-                className={pathName === route ? `${s['menu__link']} ${s.active}` : s['menu__link']}
-              >
-                {name}
-              </Link>
-            </li>
-          ))}
+          {data &&
+            data.data &&
+            data.data.map(({ name, _id }) => (
+              <li key={_id} className={s['menu__item']}>
+                <Link
+                  href={`/categorie/${_id}`}
+                  className={pathName === _id ? `${s['menu__link']} ${s.active}` : s['menu__link']}
+                >
+                  {name}
+                </Link>
+              </li>
+            ))}
         </ul>
         {!isAuth && (
           <Link href={Routes.login} className={s.authLink}>

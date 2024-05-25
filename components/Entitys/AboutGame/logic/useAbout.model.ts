@@ -32,6 +32,7 @@ export const useAbout = (votes: string[]) => {
 
   useEffect(() => {
     filterVotes()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [votes, user])
 
   return {

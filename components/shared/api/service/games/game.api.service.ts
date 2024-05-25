@@ -6,35 +6,36 @@ import { APIService } from '../../api.instance'
 class GameApiService extends APIService {
   private prefix = '/game'
 
-  public async getAllGames(query?: QueryGamesDto): Promise<ServerRespones<GameType[]>> {
+  public async getAllGames(query?: QueryGamesDto): Promise<ServerResponse<GameType[]>> {
     const queryValue = query?.category ? `?category=${query.category}` : ''
-    const { data } = await this.api.get<ServerRespones<GameType[]>>(`${this.prefix}${queryValue}`)
+    const { data } = await this.api.get<ServerResponse<GameType[]>>(`${this.prefix}${queryValue}`)
 
     return data
   }
 
-  public async getGameById(id: string): Promise<ServerRespones<GameType>> {
-    const { data } = await this.api.get<ServerRespones<GameType>>(`${this.prefix}/${id}`)
+  public async getGameById(id: string): Promise<ServerResponse<GameType>> {
+    const { data } = await this.api.get<ServerResponse<GameType>>(`${this.prefix}/${id}`)
 
     return data
   }
 
-  public async createGame(dto: CreateGameDto): Promise<ServerRespones<GameType>> {
-    const { data } = await this.api.post<ServerRespones<GameType>>(this.prefix, dto)
+  public async createGame(dto: CreateGameDto): Promise<ServerResponse<GameType>> {
+    const { data } = await this.api.post<ServerResponse<GameType>>(this.prefix, dto)
 
     return data
   }
 
-  public async updateGame({ id, ...dto }: UpdateGameDto): Promise<ServerRespones<GameType>> {
-    const { data } = await this.api.put<ServerRespones<GameType>>(`${this.prefix}/${id}`, dto)
+  public async updateGame({ id, ...dto }: UpdateGameDto): Promise<ServerResponse<GameType>> {
+    const { data } = await this.api.put<ServerResponse<GameType>>(`${this.prefix}/${id}`, dto)
 
     return data
   }
-  public async deleteGame(id: number): Promise<ServerRespones<GameType>> {
-    const { data } = await this.api.delete<ServerRespones<GameType>>(`${this.prefix}/${id}`)
+  public async deleteGame(id: number): Promise<ServerResponse<GameType>> {
+    const { data } = await this.api.delete<ServerResponse<GameType>>(`${this.prefix}/${id}`)
 
     return data
   }
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default new GameApiService()

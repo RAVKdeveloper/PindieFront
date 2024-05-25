@@ -12,6 +12,5 @@ export const Routes = {
 
   // Auth
   login: '/login',
-
-  dashboard: '/dashboard',
+  registration: '/registration',
 }

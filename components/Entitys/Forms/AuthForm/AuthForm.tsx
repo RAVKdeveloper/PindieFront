@@ -1,7 +1,9 @@
 'use client'
 
+import Link from 'next/link'
 import { FC } from 'react'
 
+import { Routes } from '@/routes/routes'
 import FormBtn from '@/ui/FormBtn/FormBtn'
 import TextField from '@/ui/TextField/TextField'
 
@@ -38,6 +40,9 @@ const AuthForm: FC = () => {
         <FormBtn text='Очистить' type='reset' variant={'basic'} />
         <FormBtn onClick={submit} text='Войти' type='button' variant='primary' />
       </div>
+      <Link href={Routes.registration} className={s.registration}>
+        Зарегистрироваться
+      </Link>
     </form>
   )
 }

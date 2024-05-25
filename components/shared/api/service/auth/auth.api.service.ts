@@ -24,4 +24,5 @@ class AuthApiService extends APIService {
   }
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default new AuthApiService()

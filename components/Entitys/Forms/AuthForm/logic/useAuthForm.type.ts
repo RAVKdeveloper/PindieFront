@@ -7,6 +7,7 @@ export interface FormData {
 
 export interface useAuthFormType {
   submit: () => void
+  // eslint-disable-next-line no-unused-vars
   changeInput: (e: ChangeEvent<HTMLInputElement>) => void
   authData: FormData
   message: string
