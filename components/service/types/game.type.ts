@@ -11,5 +11,5 @@ export interface GameType {
   updated_at: string
   user: null | UserType[]
   categories: string[]
-  vote: string[]
+  vote: User[]
 }

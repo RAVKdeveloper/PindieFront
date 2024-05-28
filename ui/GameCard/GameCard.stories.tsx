@@ -21,7 +21,7 @@ export const Default: Story = {
     description: `Управляй автомобилем, избегая аварий и перепрыгивая препятствия 
         на пути к следующему уровню.`,
     developer: 'Mahisto',
-    vote: ['2e2eqwewqewe'],
+    vote: [],
     categories: ['new'],
   },
 }
