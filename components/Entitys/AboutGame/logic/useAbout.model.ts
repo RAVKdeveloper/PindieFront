@@ -4,7 +4,7 @@ import useStore from '@/components/service/zustand/store.instance'
 
 import { useCreateVoteMutation, useRemoveVoteMutation } from '@/components/shared'
 
-export const useAbout = (votes: string[]) => {
+export const useAbout = (votes: User[]) => {
   const [voited, setIsVoited] = useState<boolean>(false)
   const { user, setIsOpenPopup, isOpenPopup } = useStore()
   const { mutate: createVote } = useCreateVoteMutation()
@@ -20,7 +20,7 @@ export const useAbout = (votes: string[]) => {
 
   const filterVotes = () => {
     if (votes && user) {
-      const isVoites = votes.find(id => id === user._id)
+      const isVoites = votes.find(({ _id }) => _id === user._id)
 
       if (!isVoites) setIsVoited(false)
 

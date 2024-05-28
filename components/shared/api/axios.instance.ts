@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { ServerApi } from '@/configs/server.config'
 
-const apiUrl = process.env.SERVER_URL ?? ServerApi
+const apiUrl = ServerApi
 
 export const apiInstance = axios.create({
   baseURL: apiUrl,
